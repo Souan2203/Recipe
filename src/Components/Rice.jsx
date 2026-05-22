@@ -1,0 +1,396 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import useFetch from '../Hooks/fetch'
+import axios from 'axios'
+
+const Rice = () => {
+
+    const [riceitem, setriceitem] = useState([])
+    const [showForm, setShowForm] = useState(false)
+    const [search, setSearch] = useState("")
+
+    const [getall] = useFetch()
+
+    // Fetch All Rice Items
+    const getAll = useCallback(async () => {
+
+        try {
+
+            let apiUrl = `http://localhost:3005/api/rice/all`
+
+            let riceObj = await getall(apiUrl)
+
+            console.log(riceObj)
+
+            setriceitem(riceObj)
+
+        } catch (error) {
+
+            console.log(error)
+
+        }
+
+    }, [getall])
+
+    useEffect(() => {
+
+        getAll()
+
+    }, [getAll])
+
+    // Live Search Filter
+    const filteredRice = riceitem.filter((rice) =>
+        rice.foodname.toLowerCase().includes(search.toLowerCase()) ||
+        rice.ingredients.toLowerCase().includes(search.toLowerCase()) ||
+        rice.fooddesc.toLowerCase().includes(search.toLowerCase())
+    )
+
+    // Refs
+    const hiddenref = useRef("")
+    const foodnameref = useRef("")
+    const ingredientsref = useRef("")
+    const fooddescref = useRef("")
+
+    // Show Single Rice Item
+    const showRice = async (_id) => {
+
+        try {
+
+            setShowForm(true)
+
+            let rice = await axios.get(
+                `http://localhost:3005/api/rice/show/${_id}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
+            )
+
+            console.log(rice.data)
+
+            foodnameref.current.value = rice.data.foodname
+            ingredientsref.current.value = rice.data.ingredients
+            fooddescref.current.value = rice.data.fooddesc
+            hiddenref.current.value = rice.data._id
+
+        } catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+    // Update Rice
+    const getupdate = useCallback(async (e) => {
+
+        e.preventDefault()
+
+        try {
+
+            let response = await axios.put(
+                `http://localhost:3005/api/rice/update/${hiddenref.current.value}`,
+                {
+                    foodname: foodnameref.current.value,
+                    ingredients: ingredientsref.current.value,
+                    fooddesc: fooddescref.current.value
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
+            )
+
+            console.log(response)
+
+            alert("Rice Updated Successfully")
+
+            setShowForm(false)
+
+            getAll()
+
+        } catch (error) {
+
+            console.log(error)
+
+        }
+
+    }, [getAll])
+
+    // Delete Rice
+    const deleteRice = async (_id) => {
+
+        try {
+
+            let del = await axios.delete(
+                `http://localhost:3005/api/rice/delete/${_id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
+            )
+
+            console.log(del)
+
+            if (del.status === 200) {
+
+                alert("Rice Deleted Successfully")
+
+                getAll()
+
+            }
+
+        } catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+    return (
+
+        <div>
+
+            {/* Main Section */}
+            <div className='min-h-screen bg-[#fff8f0] px-4 sm:px-6 md:px-10 py-10 md:py-14'>
+
+                {/* Heading */}
+                <div className='text-center mb-10 md:mb-14'>
+
+                    <h1
+                        className='text-3xl sm:text-4xl md:text-5xl font-black text-[#800000] mb-4 leading-tight'
+                        style={{ fontFamily: "'Hind Siliguri', sans-serif" }}
+                    >
+                        ভাতের জনপ্রিয় রেসিপি
+                    </h1>
+
+                    <p className='text-gray-600 text-base sm:text-lg'>
+                        বাংলার ঐতিহ্যবাহী স্বাদের সেরা ভাতের পদ
+                    </p>
+
+                </div>
+
+                {/* Search Box */}
+                <div className='flex justify-center mb-10'>
+
+                    <input
+                        type="text"
+                        placeholder='রেসিপি খুঁজুন...'
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className='w-full sm:w-[90%] md:w-[500px]
+                        border-2 border-[#800000]
+                        px-4 sm:px-5 py-3 rounded-2xl
+                        outline-none text-base sm:text-lg
+                        focus:ring-4 focus:ring-[#800000]/20'
+                    />
+
+                </div>
+
+                {/* Cards */}
+                <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-10'>
+
+                    {filteredRice.length > 0 ? (
+
+                        filteredRice.map((rice, index) => (
+
+                            <div
+                                key={index}
+                                className='bg-white rounded-3xl overflow-hidden
+                                shadow-lg hover:shadow-2xl
+                                transition-all duration-300
+                                hover:-translate-y-2'
+                            >
+
+                                {/* Image */}
+                                <div className='h-52 sm:h-56 overflow-hidden'>
+
+                                    <img
+                                        className='w-full h-full object-cover hover:scale-110 duration-500'
+                                        src={`http://localhost:3005/uploads/rice/${rice.image}`}
+                                        alt={rice.foodname}
+                                    />
+
+                                </div>
+
+                                {/* Content */}
+                                <div className='p-4 sm:p-6'>
+
+                                    <h2
+                                        className='text-xl sm:text-2xl font-bold text-[#800000] mb-4 break-words'
+                                        style={{ fontFamily: "'Hind Siliguri', sans-serif" }}
+                                    >
+                                        {rice.foodname}
+                                    </h2>
+
+                                    {/* Ingredients */}
+                                    <div className='mb-5'>
+
+                                        <h3 className='font-bold text-base sm:text-lg mb-2 text-gray-800'>
+                                            উপকরণ :
+                                        </h3>
+
+                                        <p className='text-gray-600 leading-7 text-sm sm:text-base break-words'>
+                                            {rice.ingredients}
+                                        </p>
+
+                                    </div>
+
+                                    {/* Description */}
+                                    <div className='mb-6'>
+
+                                        <h3 className='font-bold text-base sm:text-lg mb-2 text-gray-800'>
+                                            রেসিপি :
+                                        </h3>
+
+                                        <p className='text-gray-600 leading-7 text-sm sm:text-base break-words'>
+                                            {rice.fooddesc}
+                                        </p>
+
+                                    </div>
+
+                                    {/* Buttons */}
+                                    <div className='flex flex-col sm:flex-row gap-3'>
+
+                                        {/* Edit Button */}
+                                       {/*  <button
+                                            onClick={() => showRice(rice._id)}
+                                            className='w-full sm:w-auto bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 duration-300'
+                                        >
+                                            Edit
+                                        </button> */}
+
+                                        {/* Delete Button */}
+                                        {/* <button
+                                            className='w-full sm:w-auto bg-[#800000] text-white px-4 py-2 rounded-lg hover:bg-[#5c0000] duration-300'
+                                            onClick={() => deleteRice(rice._id)}
+                                        >
+                                            Delete
+                                        </button> */}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        ))
+
+                    ) : (
+
+                        <div className='col-span-full text-center text-xl sm:text-2xl font-bold text-gray-500'>
+                            কোনো রেসিপি পাওয়া যায়নি
+                        </div>
+
+                    )}
+
+                </div>
+
+            </div>
+
+            {/* Update Form Modal */}
+            {
+                showForm && (
+
+                    <div className='fixed inset-0 bg-black/50 flex justify-center items-center z-50 px-4'>
+
+                        <form
+                            onSubmit={getupdate}
+                            className='bg-white p-5 sm:p-8 rounded-2xl w-full max-w-md space-y-5 shadow-2xl'
+                        >
+
+                            <h2 className='text-2xl sm:text-3xl font-bold text-center text-[#800000]'>
+                                Update Rice
+                            </h2>
+
+                            <input
+                                type="hidden"
+                                ref={hiddenref}
+                            />
+
+                            {/* Food Name */}
+                            <div>
+
+                                <label className='block mb-2 font-semibold'>
+                                    Food Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    ref={foodnameref}
+                                    className='w-full border border-gray-300 p-3 rounded-xl outline-none focus:border-[#800000]'
+                                    required
+                                />
+
+                            </div>
+
+                            {/* Ingredients */}
+                            <div>
+
+                                <label className='block mb-2 font-semibold'>
+                                    Ingredients
+                                </label>
+
+                                <input
+                                    type="text"
+                                    ref={ingredientsref}
+                                    className='w-full border border-gray-300 p-3 rounded-xl outline-none focus:border-[#800000]'
+                                    required
+                                />
+
+                            </div>
+
+                            {/* Description */}
+                            <div>
+
+                                <label className='block mb-2 font-semibold'>
+                                    Description
+                                </label>
+
+                                <textarea
+                                    ref={fooddescref}
+                                    rows="4"
+                                    className='w-full border border-gray-300 p-3 rounded-xl outline-none focus:border-[#800000]'
+                                    required
+                                />
+
+                            </div>
+
+                            {/* Buttons */}
+                            <div className='flex flex-col sm:flex-row gap-3 justify-end'>
+
+                                <button
+                                    type='button'
+                                    onClick={() => setShowForm(false)}
+                                    className='w-full sm:w-auto bg-red-500 text-white px-5 py-2 rounded-xl hover:bg-red-600 duration-300'
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    type='submit'
+                                    className='w-full sm:w-auto bg-green-600 text-white px-5 py-2 rounded-xl hover:bg-green-700 duration-300'
+                                >
+                                    Update
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                )
+            }
+
+        </div>
+
+    )
+
+}
+
+export default Rice
