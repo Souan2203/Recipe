@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Signin = () => {
 
@@ -32,18 +32,29 @@ const Signin = () => {
 
         try {
 
+            const payload = {
+                email: user.email.trim().toLowerCase(),
+                pass: user.pass.trim()
+            }
+
             let response = await axios.post(
-                "http://localhost:3005/api/user/signin",
-                user
+                "https://recipeback.vercel.app/api/user/signin",
+                payload
             )
 
             if (response?.data?.message === "login successfully") {
 
                 localStorage.setItem("token", response?.data?.token)
 
-                localStorage.setItem("name", response?.data?.user?.name)
+                localStorage.setItem(
+                    "name",
+                    response?.data?.user?.name
+                )
 
-                localStorage.setItem("loginTime", Date.now())
+                localStorage.setItem(
+                    "loginTime",
+                    Date.now()
+                )
 
                 navigate("/")
 
@@ -53,7 +64,10 @@ const Signin = () => {
 
             console.log(error)
 
-            alert("Invalid Email or Password")
+            alert(
+                error?.response?.data?.message ||
+                "Invalid Email or Password"
+            )
 
         } finally {
 
@@ -100,6 +114,7 @@ const Signin = () => {
                             name="email"
                             placeholder='Enter your email'
                             required
+                            autoComplete="off"
                             value={user.email}
                             onChange={handleChange}
                             className='w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm sm:text-base outline-none focus:border-amber-500 transition duration-300'
@@ -119,6 +134,7 @@ const Signin = () => {
                             name="pass"
                             placeholder='Enter your password'
                             required
+                            autoComplete="new-password"
                             value={user.pass}
                             onChange={handleChange}
                             className='w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-sm sm:text-base outline-none focus:border-amber-500 transition duration-300'
@@ -146,13 +162,13 @@ const Signin = () => {
 
                     Don’t have an account?
 
-                    <a href="/signup">
+                    <Link to="/signup">
 
                         <span className='text-amber-700 font-semibold cursor-pointer ml-1 hover:underline'>
                             Signup
                         </span>
 
-                    </a>
+                    </Link>
 
                 </p>
 
