@@ -75,7 +75,6 @@ const Form = () => {
       .required("Ingredients are Required"),
 
     fooddesc: Yup.string()
-      .matches(/^.{20,}$/, "Description must be at least 20 characters")
       .required("Food Description is Required")
 
   })
