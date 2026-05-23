@@ -12,7 +12,7 @@ const Form = () => {
 
   // const [imageError, setImageError] = useState("")
 
-  // COMMENTED FILE HANDLE
+ 
   /*
   const handleFileChange = (e) => {
 
