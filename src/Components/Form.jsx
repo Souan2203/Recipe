@@ -79,7 +79,7 @@ const Form = () => {
       .required("Ingredients are Required"),
 
     fooddesc: Yup.string()
-      .min(20, "Description must be at least 20 characters")
+      .matches(/^.{20,}$/, "Description must be at least 20 characters")
       .required("Food Description is Required")
 
   })
@@ -348,6 +348,17 @@ const Form = () => {
               onBlur={formik.handleBlur}
               className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-yellow-50 resize-none text-sm sm:text-base'
             ></textarea>
+
+             {
+              formik.errors.fooddesc &&
+              formik.touched.fooddesc && (
+
+                <p className='text-red-500 text-xs sm:text-sm mt-1'>
+                  {formik.errors.fooddesc}
+                </p>
+
+              )
+            }
 
           </div>
 
