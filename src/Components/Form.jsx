@@ -105,13 +105,13 @@ const Form = () => {
         let response
 
         // FormData
-        const formData = new FormData()
+      const foodData = {
 
-        formData.append("foodname", data.foodname)
+      foodname: data.foodname,
+      ingredients: data.ingredients,
+      fooddesc: data.fooddesc
 
-        formData.append("ingredients", data.ingredients)
-
-        formData.append("fooddesc", data.fooddesc)
+      }
 
         // IMAGE COMMENTED
         /*
@@ -155,12 +155,12 @@ const Form = () => {
 
           apiUrl,
 
-          formData,
+          foodData,
 
           {
             headers: {
 
-              "Content-Type": "multipart/form-data",
+              "Content-Type": "application/json",
 
               Authorization: `Bearer ${localStorage.getItem("token")}`
 
