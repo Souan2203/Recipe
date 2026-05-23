@@ -209,15 +209,15 @@ const Chicken = () => {
                         >
 
                             {/* Image */}
-                            <div className='h-52 sm:h-56 overflow-hidden'>
+                            {/* <div className='h-52 sm:h-56 overflow-hidden'>
 
-                               {/*  <img
+                                <img
                                     className='w-full h-full object-cover hover:scale-110 duration-500'
                                     src={chicken.image}
                                     alt={chicken.foodname}
-                                /> */}
+                                /> 
 
-                            </div>
+                            </div> */}
 
                             {/* Content */}
                             <div className='p-5 md:p-6'>
