@@ -13,6 +13,7 @@ const Signin = () => {
 
     const [loading, setLoading] = useState(false)
 
+    // Handle Input Change
     const handleChange = (event) => {
 
         const { name, value } = event.target
@@ -24,6 +25,7 @@ const Signin = () => {
 
     }
 
+    // Handle Submit
     const handleSubmit = async (event) => {
 
         event.preventDefault()
@@ -33,29 +35,51 @@ const Signin = () => {
         try {
 
             let response = await axios.post(
+
                 "https://recipe-backend-deployement-mkke.vercel.app/api/user/signin",
-                user
+
+                user,
+
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+
             )
+
+            console.log(response.data)
 
             if (response?.data?.message === "login successfully") {
 
-                localStorage.setItem("token", response?.data?.token)
-
+                // OPTIONAL STORAGE
                 localStorage.setItem("name", response?.data?.user?.name)
 
                 localStorage.setItem("loginTime", Date.now())
+
+                alert("Login Successful")
 
                 navigate("/")
 
             }
 
-        } catch (error) {
+            else {
+
+                alert("Invalid Email or Password")
+
+            }
+
+        }
+
+        catch (error) {
 
             console.log(error)
 
-            alert("Invalid Email or Password")
+            alert("Something went wrong")
 
-        } finally {
+        }
+
+        finally {
 
             setLoading(false)
 
@@ -126,7 +150,7 @@ const Signin = () => {
 
                     </div>
 
-                    {/* Button */}
+                    {/* Submit Button */}
                     <button
                         type='submit'
                         disabled={loading}
