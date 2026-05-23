@@ -7,74 +7,33 @@ const Form = () => {
 
   const [issubmit, setsubmit] = useState(false)
 
-  // COMMENTED IMAGE STATE
-  // const [image, setImage] = useState(null)
-
-  // const [imageError, setImageError] = useState("")
-
- 
-  /*
-  const handleFileChange = (e) => {
-
-    const file = e.target.files[0]
-
-    if (!file) {
-
-      setImage(null)
-
-      setImageError("Image is required")
-
-      return
-
-    }
-
-    const allowedTypes = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/webp"
-    ]
-
-    if (!allowedTypes.includes(file.type)) {
-
-      setImage(null)
-
-      setImageError("Only JPG, PNG and WEBP images are allowed")
-
-      return
-
-    }
-
-    if (file.size > 2 * 1024 * 1024) {
-
-      setImage(null)
-
-      setImageError("Image size must be less than 2MB")
-
-      return
-
-    }
-
-    setImage(file)
-
-    setImageError("")
-
-  }
-  */
-
   // Validation Schema
   const validationSchema = Yup.object({
 
-    catagory: Yup.string()
+    category: Yup.string()
       .required("Please select a category"),
 
     foodname: Yup.string()
+      .min(3, "Food name must be at least 3 characters")
+      .max(50, "Food name cannot exceed 50 characters")
+      .matches(
+        /^[A-Za-z\s]+$/,
+        "Only alphabets are allowed"
+      )
       .required("Food Name is Required"),
 
     ingredients: Yup.string()
+      .min(10, "Ingredients must be at least 10 characters")
+      .max(300, "Ingredients cannot exceed 300 characters")
       .required("Ingredients are Required"),
 
     fooddesc: Yup.string()
+      .min(20, "Description must be at least 20 characters")
+      .max(500, "Description cannot exceed 500 characters")
+      .matches(
+        /^[A-Za-z0-9\s.,!?'"()\-:;]+$/,
+        "Invalid characters in description"
+      )
       .required("Food Description is Required")
 
   })
@@ -84,7 +43,7 @@ const Form = () => {
 
     initialValues: {
 
-      catagory: "",
+      category: "",
       foodname: "",
       ingredients: "",
       fooddesc: ""
@@ -99,48 +58,44 @@ const Form = () => {
 
         let response
 
-        // FormData
-      const foodData = {
+        // Food Data
+        const foodData = {
 
-      foodname: data.foodname,
-      ingredients: data.ingredients,
-      fooddesc: data.fooddesc
+          category: data.category,
+          foodname: data.foodname,
+          ingredients: data.ingredients,
+          fooddesc: data.fooddesc
 
-      }
-
-        // IMAGE COMMENTED
-        /*
-        formData.append("image", image)
-        */
+        }
 
         // Dynamic API URL
         let apiUrl = ""
 
-        if (data.catagory === "chicken") {
+        if (data.category === "chicken") {
 
           apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/chicken/add"
 
         }
 
-        else if (data.catagory === "fish") {
+        else if (data.category === "fish") {
 
           apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/fish/add"
 
         }
 
-        else if (data.catagory === "mutton") {
+        else if (data.category === "mutton") {
 
           apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/mutton/add"
 
         }
 
-        else if (data.catagory === "rice") {
+        else if (data.category === "rice") {
 
           apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/rice/add"
 
         }
 
-        else if (data.catagory === "sweet") {
+        else if (data.category === "sweet") {
 
           apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/sweet/add"
 
@@ -166,26 +121,25 @@ const Form = () => {
 
         console.log(response.data)
 
-        if (response.data) {
+        if (response.status === 200 || response.status === 201) {
 
           alert("Food Added Successfully")
 
           setsubmit(true)
 
-        } else {
+          resetForm()
+
+        }
+
+        else {
 
           alert("Unable to Add")
 
         }
 
-        resetForm()
+      }
 
-        // COMMENTED
-        // setImage(null)
-
-        // setImageError("")
-
-      } catch (error) {
+      catch (error) {
 
         console.log(error)
 
@@ -198,10 +152,6 @@ const Form = () => {
     onReset: () => {
 
       setsubmit(false)
-
-      // setImage(null)
-
-      // setImageError("")
 
     }
 
@@ -244,8 +194,8 @@ const Form = () => {
             </label>
 
             <select
-              name='catagory'
-              value={formik.values.catagory}
+              name='category'
+              value={formik.values.category}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-yellow-50 text-sm sm:text-base'
@@ -266,11 +216,11 @@ const Form = () => {
             </select>
 
             {
-              formik.errors.catagory &&
-              formik.touched.catagory && (
+              formik.errors.category &&
+              formik.touched.category && (
 
                 <p className='text-red-500 text-xs sm:text-sm mt-1'>
-                  {formik.errors.catagory}
+                  {formik.errors.category}
                 </p>
 
               )
@@ -325,6 +275,17 @@ const Form = () => {
               className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-yellow-50 text-sm sm:text-base'
             />
 
+            {
+              formik.errors.ingredients &&
+              formik.touched.ingredients && (
+
+                <p className='text-red-500 text-xs sm:text-sm mt-1'>
+                  {formik.errors.ingredients}
+                </p>
+
+              )
+            }
+
           </div>
 
           {/* Description */}
@@ -344,7 +305,7 @@ const Form = () => {
               className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-yellow-50 resize-none text-sm sm:text-base'
             ></textarea>
 
-             {
+            {
               formik.errors.fooddesc &&
               formik.touched.fooddesc && (
 
@@ -356,25 +317,6 @@ const Form = () => {
             }
 
           </div>
-
-          {/* IMAGE INPUT COMMENTED */}
-          {/*
-          <div>
-
-            <label className='block mb-2 font-semibold text-gray-700 text-sm sm:text-base'>
-              Upload Food Picture
-            </label>
-
-            <input
-              type="file"
-              name="image"
-              accept='image/*'
-              onChange={handleFileChange}
-              className='w-full px-4 py-3 rounded-xl border border-gray-300 bg-yellow-50 text-sm sm:text-base'
-            />
-
-          </div>
-          */}
 
           {/* Buttons */}
           <div className='flex flex-col sm:flex-row justify-center gap-4 pt-4'>
