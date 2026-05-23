@@ -69,10 +69,6 @@ const Form = () => {
       .required("Please select a category"),
 
     foodname: Yup.string()
-      .matches(
-        /^[A-Za-z\s]{1,20}$/,
-        "Food Name can contain only letters and maximum 20 characters"
-      )
       .required("Food Name is Required"),
 
     ingredients: Yup.string()
