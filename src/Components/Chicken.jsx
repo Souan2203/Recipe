@@ -15,7 +15,7 @@ const Chicken = () => {
 
         try {
 
-            let apiUrl = "https://recipebackendrecipe.vercel.app/api/chicken/all"
+            let apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/chicken/all"
 
             let response = await getall(apiUrl);
 
@@ -58,7 +58,7 @@ const Chicken = () => {
             setShowForm(true)
 
             let chicken = await axios.get(
-                `https://recipebackendrecipe.vercel.app/api/chicken/show/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/chicken/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Chicken = () => {
         try {
 
             await axios.put(
-                `https://recipebackendrecipe.vercel.app/api/chicken/update/${hiddenref.current.value}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/chicken/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -131,7 +131,7 @@ const Chicken = () => {
         try {
 
             let delobj = await axios.delete(
-                `https://recipebackendrecipe.vercel.app/api/chicken/delete/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/chicken/delete/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -211,11 +211,11 @@ const Chicken = () => {
                             {/* Image */}
                             <div className='h-52 sm:h-56 overflow-hidden'>
 
-                                <img
+                               {/*  <img
                                     className='w-full h-full object-cover hover:scale-110 duration-500'
-                                    src={`https://recipebackendrecipe.vercel.app/uploads/ChickenUploads/${chicken.image}`}
+                                    src={chicken.image}
                                     alt={chicken.foodname}
-                                />
+                                /> */}
 
                             </div>
 

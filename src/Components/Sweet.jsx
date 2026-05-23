@@ -17,7 +17,7 @@ const Sweet = () => {
 
         try {
 
-            let apiUrl = `https://recipebackendrecipe.vercel.app/api/sweet/all`
+            let apiUrl = `https://recipe-backend-deployement-mkke.vercel.app/api/sweet/all`
 
             let sweetObj = await getall(apiUrl)
 
@@ -68,7 +68,7 @@ const Sweet = () => {
             setShowForm(true)
 
             let sweet = await axios.get(
-                `https://recipebackendrecipe.vercel.app/api/sweet/show/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/sweet/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const Sweet = () => {
         try {
 
             await axios.put(
-                `https://recipebackendrecipe.vercel.app/api/sweet/update/${hiddenref.current.value}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/sweet/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -133,7 +133,7 @@ const Sweet = () => {
         try {
 
             let del = await axios.delete(
-                `https://recipebackendrecipe.vercel.app/api/sweet/delete/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/sweet/delete/${_id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -216,15 +216,15 @@ const Sweet = () => {
                                 >
 
                                     {/* Image */}
-                                    <div className='h-52 sm:h-56 overflow-hidden'>
+                                    {/* <div className='h-52 sm:h-56 overflow-hidden'>
 
                                         <img
                                             className='w-full h-full object-cover hover:scale-110 duration-500'
-                                            src={`https://recipebackendrecipe.vercel.app/uploads/sweet/${sweets.image}`}
+                                            src={`https://recipe-backend-deployement-mkke.vercel.app/uploads/SweetUploads/${sweets.image}`}
                                             alt={sweets.foodname}
                                         />
 
-                                    </div>
+                                    </div> */}
 
                                     {/* Content */}
                                     <div className='p-5 md:p-6'>

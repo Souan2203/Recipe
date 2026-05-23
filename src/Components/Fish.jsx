@@ -10,7 +10,7 @@ const Fish = () => {
     const fetchpost = useCallback(async () => {
         try {
 
-            let apiUrl = `https://recipebackendrecipe.vercel.app/api/fish/all`
+            let apiUrl = `https://recipe-backend-deployement-mkke.vercel.app/api/fish/all`
 
             let response = await getall(apiUrl)
 
@@ -40,7 +40,7 @@ const Fish = () => {
             setShowForm(true)
 
             let fish = await axios.get(
-                `https://recipebackendrecipe.vercel.app/api/fish/show/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/fish/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const Fish = () => {
         try {
 
             await axios.put(
-                `https://recipebackendrecipe.vercel.app/api/fish/update/${hiddenref.current.value}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/fish/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -111,7 +111,7 @@ const Fish = () => {
         try {
 
             let delobj = await axios.delete(
-                `https://recipebackendrecipe.vercel.app/api/fish/delete/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/fish/delete/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -170,7 +170,7 @@ const Fish = () => {
                     >
 
                         {/* Image */}
-                        <div className='h-56 overflow-hidden'>
+         {/*                <div className='h-56 overflow-hidden'>
 
                             <img
                                 className='w-full h-full object-cover hover:scale-110 duration-500'
@@ -178,7 +178,7 @@ const Fish = () => {
                                 alt=""
                             />
 
-                        </div>
+                        </div> */}
 
                         {/* Content */}
                         <div className='p-6'>

@@ -15,7 +15,7 @@ const Mutton = () => {
 
         try {
 
-            let apiUrl = `https://recipebackendrecipe.vercel.app/api/mutton/all`
+            let apiUrl = `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/all`
 
             let muttonObj = await getall(apiUrl)
 
@@ -58,7 +58,7 @@ const Mutton = () => {
             setShowForm(true)
 
             let mutton = await axios.get(
-                `https://recipebackendrecipe.vercel.app/api/mutton/show/${_id}`,
+                `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Mutton = () => {
         try {
 
             await axios.put(
-                `https://recipebackendrecipe.vercel.app/api/mutton/update/${hiddenref.current.value}`,
+                `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -131,7 +131,7 @@ const Mutton = () => {
         try {
 
             let delobj = await axios.delete(
-                `https://recipebackendrecipe.vercel.app/api/mutton/delete/${_id}`,
+                `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/delete/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -209,7 +209,7 @@ const Mutton = () => {
                         >
 
                             {/* Image */}
-                            <div className='h-52 sm:h-56 overflow-hidden'>
+                            {/* <div className='h-52 sm:h-56 overflow-hidden'>
 
                                 <img
                                     className='w-full h-full object-cover hover:scale-110 duration-500'
@@ -217,7 +217,7 @@ const Mutton = () => {
                                     alt={mutton.foodname}
                                 />
 
-                            </div>
+                            </div> */}
 
                             {/* Content */}
                             <div className='p-5 md:p-6'>

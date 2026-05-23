@@ -7,11 +7,13 @@ const Form = () => {
 
   const [issubmit, setsubmit] = useState(false)
 
-  const [image, setImage] = useState(null)
+  // COMMENTED IMAGE STATE
+  // const [image, setImage] = useState(null)
 
-  const [imageError, setImageError] = useState("")
+  // const [imageError, setImageError] = useState("")
 
-  // Handle File
+  // COMMENTED FILE HANDLE
+  /*
   const handleFileChange = (e) => {
 
     const file = e.target.files[0]
@@ -26,7 +28,6 @@ const Form = () => {
 
     }
 
-    // File Type Validation
     const allowedTypes = [
       "image/jpeg",
       "image/jpg",
@@ -44,7 +45,6 @@ const Form = () => {
 
     }
 
-    // File Size Validation (2MB)
     if (file.size > 2 * 1024 * 1024) {
 
       setImage(null)
@@ -60,6 +60,7 @@ const Form = () => {
     setImageError("")
 
   }
+  */
 
   // Validation Schema
   const validationSchema = Yup.object({
@@ -101,14 +102,6 @@ const Form = () => {
 
       try {
 
-        if (!image) {
-
-          setImageError("Please upload a food image")
-
-          return
-
-        }
-
         let response
 
         // FormData
@@ -120,39 +113,41 @@ const Form = () => {
 
         formData.append("fooddesc", data.fooddesc)
 
-        // IMPORTANT
-        formData.append(data.catagory, image)
+        // IMAGE COMMENTED
+        /*
+        formData.append("image", image)
+        */
 
         // Dynamic API URL
         let apiUrl = ""
 
         if (data.catagory === "chicken") {
 
-          apiUrl = "https://recipebackendrecipe.vercel.app/api/chicken/add"
+          apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/chicken/add"
 
         }
 
         else if (data.catagory === "fish") {
 
-          apiUrl = "https://recipebackendrecipe.vercel.app/api/fish/add"
+          apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/fish/add"
 
         }
 
         else if (data.catagory === "mutton") {
 
-          apiUrl = "https://recipebackendrecipe.vercel.app/api/mutton/add"
+          apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/mutton/add"
 
         }
 
         else if (data.catagory === "rice") {
 
-          apiUrl = "https://recipebackendrecipe.vercel.app/api/rice/add"
+          apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/rice/add"
 
         }
 
         else if (data.catagory === "sweet") {
 
-          apiUrl = "https://recipebackendrecipe.vercel.app/api/sweet/add"
+          apiUrl = "https://recipe-backend-deployement-mkke.vercel.app/api/sweet/add"
 
         }
 
@@ -190,9 +185,10 @@ const Form = () => {
 
         resetForm()
 
-        setImage(null)
+        // COMMENTED
+        // setImage(null)
 
-        setImageError("")
+        // setImageError("")
 
       } catch (error) {
 
@@ -208,9 +204,9 @@ const Form = () => {
 
       setsubmit(false)
 
-      setImage(null)
+      // setImage(null)
 
-      setImageError("")
+      // setImageError("")
 
     }
 
@@ -334,17 +330,6 @@ const Form = () => {
               className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-yellow-50 text-sm sm:text-base'
             />
 
-            {
-              formik.errors.ingredients &&
-              formik.touched.ingredients && (
-
-                <p className='text-red-500 text-xs sm:text-sm mt-1'>
-                  {formik.errors.ingredients}
-                </p>
-
-              )
-            }
-
           </div>
 
           {/* Description */}
@@ -364,20 +349,10 @@ const Form = () => {
               className='w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 bg-yellow-50 resize-none text-sm sm:text-base'
             ></textarea>
 
-            {
-              formik.errors.fooddesc &&
-              formik.touched.fooddesc && (
-
-                <p className='text-red-500 text-xs sm:text-sm mt-1'>
-                  {formik.errors.fooddesc}
-                </p>
-
-              )
-            }
-
           </div>
 
-          {/* Image Upload */}
+          {/* IMAGE INPUT COMMENTED */}
+          {/*
           <div>
 
             <label className='block mb-2 font-semibold text-gray-700 text-sm sm:text-base'>
@@ -392,27 +367,8 @@ const Form = () => {
               className='w-full px-4 py-3 rounded-xl border border-gray-300 bg-yellow-50 text-sm sm:text-base'
             />
 
-            {
-              imageError && (
-
-                <p className='text-red-500 text-xs sm:text-sm mt-1'>
-                  {imageError}
-                </p>
-
-              )
-            }
-
-            {
-              image && (
-
-                <p className='text-green-600 text-xs sm:text-sm mt-2'>
-                  Selected: {image.name}
-                </p>
-
-              )
-            }
-
           </div>
+          */}
 
           {/* Buttons */}
           <div className='flex flex-col sm:flex-row justify-center gap-4 pt-4'>

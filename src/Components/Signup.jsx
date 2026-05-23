@@ -59,7 +59,7 @@ const Signup = () => {
             try {
 
                 let response = await axios.post(
-                    "https://recipebackendrecipe.vercel.app/api/user/signup",
+                    "https://recipe-backend-deployement-mkke.vercel.app/api/user/signup",
                     data
                 )
 
