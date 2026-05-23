@@ -15,7 +15,7 @@ const Mutton = () => {
 
         try {
 
-            let apiUrl = `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/all`
+            let apiUrl = `https://recipe-backend-deployement-mkke.vercel.app/api/mutton/all`
 
             let muttonObj = await getall(apiUrl)
 
@@ -58,7 +58,7 @@ const Mutton = () => {
             setShowForm(true)
 
             let mutton = await axios.get(
-                `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/show/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/mutton/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Mutton = () => {
         try {
 
             await axios.put(
-                `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/update/${hiddenref.current.value}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/mutton/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -131,7 +131,7 @@ const Mutton = () => {
         try {
 
             let delobj = await axios.delete(
-                `ttps://recipe-backend-deployement-mkke.vercel.app/api/mutton/delete/${_id}`,
+                `https://recipe-backend-deployement-mkke.vercel.app/api/mutton/delete/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
