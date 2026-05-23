@@ -31,7 +31,7 @@ const Profile = () => {
 
         try {
 
-            const apiUrl = "http://localhost:3005/api/chicken/get"
+            const apiUrl = "https://recipebackendrecipe.vercel.app/api/chicken/get"
 
             let response = await axios.get(apiUrl, {
                 headers: {
@@ -53,7 +53,7 @@ const Profile = () => {
 
         try {
 
-            const apiUrl = "http://localhost:3005/api/fish/get"
+            const apiUrl = "https://recipebackendrecipe.vercel.app/api/fish/get"
 
             let response = await axios.get(apiUrl, {
                 headers: {
@@ -75,7 +75,7 @@ const Profile = () => {
 
         try {
 
-            const apiUrl = "http://localhost:3005/api/mutton/get"
+            const apiUrl = "https://recipebackendrecipe.vercel.app/api/mutton/get"
 
             let response = await axios.get(apiUrl, {
                 headers: {
@@ -97,7 +97,7 @@ const Profile = () => {
 
         try {
 
-            const apiUrl = "http://localhost:3005/api/sweet/get"
+            const apiUrl = "https://recipebackendrecipe.vercel.app/api/sweet/get"
 
             let response = await axios.get(apiUrl, {
                 headers: {
@@ -119,7 +119,7 @@ const Profile = () => {
 
         try {
 
-            const apiUrl = "http://localhost:3005/api/rice/get"
+            const apiUrl = "https://recipebackendrecipe.vercel.app/api/rice/get"
 
             let response = await axios.get(apiUrl, {
                 headers: {
@@ -186,7 +186,7 @@ const Profile = () => {
         try {
 
             // DYNAMIC UPDATE API
-            const apiUrl = `http://localhost:3005/api/${foodType}/update/${selectedFood._id}`
+            const apiUrl = `https://recipebackendrecipe.vercel.app/api/${foodType}/update/${selectedFood._id}`
 
             let response = await axios.put(apiUrl, formData, {
                 headers: {
@@ -225,7 +225,7 @@ const Profile = () => {
 
         try {
 
-            const apiUrl = `http://localhost:3005/api/${type}/delete/${id}`
+            const apiUrl = `https://recipebackendrecipe.vercel.app/api/${type}/delete/${id}`
 
             let response = await axios.delete(apiUrl, {
                 headers: {

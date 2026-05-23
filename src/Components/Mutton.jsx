@@ -15,7 +15,7 @@ const Mutton = () => {
 
         try {
 
-            let apiUrl = `http://localhost:3005/api/mutton/all`
+            let apiUrl = `https://recipebackendrecipe.vercel.app/api/mutton/all`
 
             let muttonObj = await getall(apiUrl)
 
@@ -58,7 +58,7 @@ const Mutton = () => {
             setShowForm(true)
 
             let mutton = await axios.get(
-                `http://localhost:3005/api/mutton/show/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/mutton/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Mutton = () => {
         try {
 
             await axios.put(
-                `http://localhost:3005/api/mutton/update/${hiddenref.current.value}`,
+                `https://recipebackendrecipe.vercel.app/api/mutton/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -131,7 +131,7 @@ const Mutton = () => {
         try {
 
             let delobj = await axios.delete(
-                `http://localhost:3005/api/mutton/delete/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/mutton/delete/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -213,7 +213,7 @@ const Mutton = () => {
 
                                 <img
                                     className='w-full h-full object-cover hover:scale-110 duration-500'
-                                    src={`http://localhost:3005/uploads/mutton/${mutton.image}`}
+                                    src={`https://recipebackendrecipe.vercel.app/uploads/mutton/${mutton.image}`}
                                     alt={mutton.foodname}
                                 />
 

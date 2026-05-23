@@ -15,7 +15,7 @@ const Rice = () => {
 
         try {
 
-            let apiUrl = `http://localhost:3005/api/rice/all`
+            let apiUrl = `https://recipebackendrecipe.vercel.app/api/rice/all`
 
             let riceObj = await getall(apiUrl)
 
@@ -58,7 +58,7 @@ const Rice = () => {
             setShowForm(true)
 
             let rice = await axios.get(
-                `http://localhost:3005/api/rice/show/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/rice/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Rice = () => {
         try {
 
             let response = await axios.put(
-                `http://localhost:3005/api/rice/update/${hiddenref.current.value}`,
+                `https://recipebackendrecipe.vercel.app/api/rice/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -125,7 +125,7 @@ const Rice = () => {
         try {
 
             let del = await axios.delete(
-                `http://localhost:3005/api/rice/delete/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/rice/delete/${_id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -211,7 +211,7 @@ const Rice = () => {
 
                                     <img
                                         className='w-full h-full object-cover hover:scale-110 duration-500'
-                                        src={`http://localhost:3005/uploads/rice/${rice.image}`}
+                                        src={`https://recipebackendrecipe.vercel.app/uploads/rice/${rice.image}`}
                                         alt={rice.foodname}
                                     />
 

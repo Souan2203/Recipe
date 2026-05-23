@@ -15,7 +15,7 @@ const Chicken = () => {
 
         try {
 
-            let apiUrl = "http://localhost:3005/api/chicken/all"
+            let apiUrl = "https://recipebackendrecipe.vercel.app/api/chicken/all"
 
             let response = await getall(apiUrl);
 
@@ -58,7 +58,7 @@ const Chicken = () => {
             setShowForm(true)
 
             let chicken = await axios.get(
-                `http://localhost:3005/api/chicken/show/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/chicken/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Chicken = () => {
         try {
 
             await axios.put(
-                `http://localhost:3005/api/chicken/update/${hiddenref.current.value}`,
+                `https://recipebackendrecipe.vercel.app/api/chicken/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -131,7 +131,7 @@ const Chicken = () => {
         try {
 
             let delobj = await axios.delete(
-                `http://localhost:3005/api/chicken/delete/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/chicken/delete/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -213,7 +213,7 @@ const Chicken = () => {
 
                                 <img
                                     className='w-full h-full object-cover hover:scale-110 duration-500'
-                                    src={`http://localhost:3005/uploads/ChickenUploads/${chicken.image}`}
+                                    src={`https://recipebackendrecipe.vercel.app/uploads/ChickenUploads/${chicken.image}`}
                                     alt={chicken.foodname}
                                 />
 

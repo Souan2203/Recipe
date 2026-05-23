@@ -128,31 +128,31 @@ const Form = () => {
 
         if (data.catagory === "chicken") {
 
-          apiUrl = "http://localhost:3005/api/chicken/add"
+          apiUrl = "https://recipebackendrecipe.vercel.app/api/chicken/add"
 
         }
 
         else if (data.catagory === "fish") {
 
-          apiUrl = "http://localhost:3005/api/fish/add"
+          apiUrl = "https://recipebackendrecipe.vercel.app/api/fish/add"
 
         }
 
         else if (data.catagory === "mutton") {
 
-          apiUrl = "http://localhost:3005/api/mutton/add"
+          apiUrl = "https://recipebackendrecipe.vercel.app/api/mutton/add"
 
         }
 
         else if (data.catagory === "rice") {
 
-          apiUrl = "http://localhost:3005/api/rice/add"
+          apiUrl = "https://recipebackendrecipe.vercel.app/api/rice/add"
 
         }
 
         else if (data.catagory === "sweet") {
 
-          apiUrl = "http://localhost:3005/api/sweet/add"
+          apiUrl = "https://recipebackendrecipe.vercel.app/api/sweet/add"
 
         }
 

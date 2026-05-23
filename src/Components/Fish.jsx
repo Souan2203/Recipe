@@ -10,7 +10,7 @@ const Fish = () => {
     const fetchpost = useCallback(async () => {
         try {
 
-            let apiUrl = `http://localhost:3005/api/fish/all`
+            let apiUrl = `https://recipebackendrecipe.vercel.app/api/fish/all`
 
             let response = await getall(apiUrl)
 
@@ -40,7 +40,7 @@ const Fish = () => {
             setShowForm(true)
 
             let fish = await axios.get(
-                `http://localhost:3005/api/fish/show/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/fish/show/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const Fish = () => {
         try {
 
             await axios.put(
-                `http://localhost:3005/api/fish/update/${hiddenref.current.value}`,
+                `https://recipebackendrecipe.vercel.app/api/fish/update/${hiddenref.current.value}`,
                 {
                     foodname: foodnameref.current.value,
                     ingredients: ingredientsref.current.value,
@@ -111,7 +111,7 @@ const Fish = () => {
         try {
 
             let delobj = await axios.delete(
-                `http://localhost:3005/api/fish/delete/${_id}`,
+                `https://recipebackendrecipe.vercel.app/api/fish/delete/${_id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -174,7 +174,7 @@ const Fish = () => {
 
                             <img
                                 className='w-full h-full object-cover hover:scale-110 duration-500'
-                                src={`http://localhost:3005/uploads/Fish/${fish.image}`}
+                                src={`https://recipebackendrecipe.vercel.app/uploads/Fish/${fish.image}`}
                                 alt=""
                             />
 
