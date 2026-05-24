@@ -24,12 +24,10 @@ const Form = () => {
 
     ingredients: Yup.string()
       .min(10, "Ingredients must be at least 10 characters")
-      .max(300, "Ingredients cannot exceed 300 characters")
       .required("Ingredients are Required"),
 
     fooddesc: Yup.string()
       .min(20, "Description must be at least 20 characters")
-      .max(500, "Description cannot exceed 500 characters")
       .required("Food Description is Required")
 
   })
