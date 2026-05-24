@@ -30,10 +30,6 @@ const Form = () => {
     fooddesc: Yup.string()
       .min(20, "Description must be at least 20 characters")
       .max(500, "Description cannot exceed 500 characters")
-      .matches(
-        /^[A-Za-z0-9\s.,!?'"()\-:;]+$/,
-        "Invalid characters in description"
-      )
       .required("Food Description is Required")
 
   })
